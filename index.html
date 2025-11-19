@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osteoarthritis Foundation Model & I-KGWAS Discovery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Updated Plotly to a specific, newer version to resolve the console warning -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            line-height: 1;
+            color: #5E60CE;
+        }
+        .flow-arrow-sm {
+            font-size: 1.5rem;
+            line-height: 1;
+            color: #5E60CE;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'darkblue': '#003F88',
+                        'midblue': '#00509D',
+                        'purple': '#5E60CE',
+                        'pinkaccent': '#FD5DA8',
+                        'lightbg': '#F6F7F8',
+                        'darktext': '#1a1a1a',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-lightbg font-sans text-darktext">
+
+    <div class="container mx-auto p-4 py-8 md:p-12">
+
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-darkblue mb-4">The "Virtual Knockout" Engine</h1>
+            <p class="text-lg md:text-xl text-midblue max-w-4xl mx-auto">A Strategic Proposal to Redefine Osteoarthritis Discovery via Multi-Modal AI and Generative Biology</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-darkblue mb-4">The "Phenotypic Bottleneck" in OA</h2>
+                <p class="text-base text-gray-700 mb-6">Osteoarthritis (OA) research is stalled. We rely on antiquated 2D radiographic standards (like KL-Grading) that mask the true, complex 3D biology of the disease. This "phenotypic bottleneck" causes clinical trials for new drugs to fail because we treat biologically distinct diseases as one.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+                        <h3 class="font-bold text-lg text-red-900 mb-2">OLD PARADIGM: Lumping</h3>
+                        <p class="text-red-800">All patients with "knee pain" and 2D joint-space narrowing are grouped together, diluting genetic signals and dooming clinical trials.</p>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-600 p-4 rounded-r-lg">
+                        <h3 class="font-bold text-lg text-green-900 mb-2">NEW STRATEGY: Splitting</h3>
+                        <p class="text-green-800">We use AI to find "Latent Phenotypes" based on 3D biology, identifying specific patient subgroups (e.g., inflammatory, metabolic, mechanical).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-darkblue mb-4">A Dual-Scale Discovery Pipeline</h2>
+                <p class="text-base text-gray-700 mb-6">Our solution integrates insights from the "Macro" (whole joint) down to the "Micro" (single cell) level. We first discover structural phenotypes and their genetic drivers, then simulate how those genes function at a cellular level.</p>
+                <div class="flex flex-col md:flex-row items-center justify-around space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="text-center p-4 bg-purple-50 rounded-lg w-full md:w-1/3 shadow">
+                        <h3 class="text-xl font-bold text-purple mb-2">MACRO-SCALE</h3>
+                        <p class="text-gray-700">Foundation Model (MRI/DXA) & I-KGWAS</p>
+                        <p class="font-semibold text-purple">GOAL: Find Genetic Drivers</p>
+                    </div>
+                    <div class="flow-arrow-sm md:flow-arrow transform md:rotate-0 rotate-90">→</div>
+                    <div class="text-center p-4 bg-pinkaccent-50 rounded-lg w-full md:w-1/3 shadow" style="background-color: #FD5DA81A;">
+                        <h3 class="text-xl font-bold text-pinkaccent mb-2">MICRO-SCALE</h3>
+                        <p class="text-gray-700">scGPT Generative Model (scRNA-seq)</p>
+                        <p class="font-semibold text-pinkaccent">GOAL: Simulate Gene Function</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-darkblue mb-4">Macro-Scale: Data Ecosystem</h2>
+                <p class="text-base text-gray-700 mb-6">We will leverage the UK Biobank, a massive, consistent dataset, to train our models, avoiding the noise from harmonizing different datasets.</p>
+                <div class="flex justify-around items-center text-center">
+                    <div>
+                        <div class="text-5xl md:text-6xl font-extrabold text-midblue">~100K</div>
+                        <div class="text-lg font-semibold text-gray-700 mt-2">Participants</div>
+                        <p class="text-sm text-gray-500">(3D MRI & 2D DXA Scans)</p>
+                    </div>
+                    <div>
+                        <div class="text-5xl md:text-6xl font-extrabold text-midblue">1.5T</div>
+                        <div class="text-lg font-semibold text-gray-700 mt-2">MRI Scans</div>
+                        <p class="text-sm text-gray-500">(Dual-Echo Dixon)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-darkblue mb-4">Macro-Scale: Foundation Model</h2>
+                <p class="text-base text-gray-700 mb-6">We align two separate Masked Autoencoders (MAE) using a CLIP-style contrastive loss to create a "Rosetta Stone" mapping 3D MRI volumes to 2D DXA scans.</p>
+                <div class="flex flex-col space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="p-3 bg-darkblue rounded-lg text-white font-bold w-1/3 text-center">3D MRI Volume</div>
+                        <div class="flow-arrow-sm">→</div>
+                        <div class="p-3 bg-gray-200 rounded-lg text-gray-800 w-2/3">VideoMAE V2 (90% Masking)</div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="p-3 bg-midblue rounded-lg text-white font-bold w-1/3 text-center">2D DXA Scan</div>
+                        <div class="flow-arrow-sm">→</div>
+                        <div class="p-3 bg-gray-200 rounded-lg text-gray-800 w-2/3">MAE (ViT)</div>
+                    </div>
+                    <div class="text-center font-bold text-purple text-2xl my-2">↓</div>
+                    <div class="p-4 bg-purple-100 border-2 border-purple rounded-lg text-purple-900 text-center font-semibold">CLIP Contrastive Loss → Shared Latent Embedding</div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-darkblue mb-4">Macro-Scale: The Discovery Engine</h2>
+                <p class="text-base text-gray-700 mb-6">The aligned embeddings are fed into a discovery pipeline. We use PCA to extract key features, Leiden Clustering to find patient groups (Latent Phenotypes), and a Heterogeneous Graph Transformer (HGT) to link these phenotypes to causal genes.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-lg font-bold text-midblue mb-4 text-center">Step 1: Discover Latent Phenotypes</h3>
+                        <p class="text-sm text-gray-600 mb-2 text-center">PCA + Leiden Clustering identifies new patient groups invisible to the naked eye. This plot shows simulated patient clusters based on their AI-derived features.</p>
+                        <div class="chart-container w-full max-w-lg h-80 md:h-96" style="height: 350px;">
+                            <div id="scatterPlot" class="w-full h-full"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-midblue mb-4 text-center">Step 2: Prioritize Genetic Targets (I-KGWAS)</h3>
+                        <p class="text-sm text-gray-600 mb-2 text-center">The HGT links phenotypes to genes. This chart shows hypothetical top-ranked gene targets associated with "Latent Phenotype 4" (e.g., Rapid Cartilage Loss).</p>
+                        <div class="chart-container w-full max-w-lg h-80 md:h-96" style="height: 350px;">
+                            <canvas id="gwasChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-pinkaccent mb-4">Micro-Scale: The "Virtual Cartilage" Engine</h2>
+                <p class="text-base text-gray-700 mb-6">This is the "killer app." We move from *association* to *causal simulation*. Using a Generative AI (scGPT) trained on 1M+ single cells, we can perform "Virtual Knockouts" to test the gene targets identified by the I-KGWAS.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-lg font-bold text-darkblue mb-4">The "In Silico" Perturbation Workflow</h3>
+                        <ol class="list-decimal list-inside space-y-3">
+                            <li class="flex items-center">
+                                <span class="bg-darkblue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">1</span>
+                                <span class="text-gray-700">Select a "Diseased" cell (e.g., Hypertrophic Chondrocyte).</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="bg-darkblue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">2</span>
+                                <span class="text-gray-700">Set target gene (e.g., <i class="font-mono">GENE_X</i>) expression to zero.</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="bg-darkblue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">3</span>
+                                <span class="text-gray-700">Run scGPT model to predict the new cell state.</span>
+                            </li>
+                            <li class="flex items-center">
+                                <span class="bg-darkblue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">4</span>
+                                <span class="text-gray-700">Readout: Does the cell's profile shift back towards "Healthy"?</span>
+                            </li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-darkblue mb-4 text-center">Simulated Result: Gene Knockout</h3>
+                        <p class="text-sm text-gray-600 mb-2 text-center">This radar chart shows the simulated effect of knocking out <i class="font-mono">GENE_X</i> on a diseased cell's gene expression profile.</p>
+                        <div class="chart-container w-full max-w-lg" style="height: 350px;">
+                            <canvas id="scgptChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-darkblue mb-4">Project Roadmap (18 Months)</h2>
+                <p class="text-base text-gray-700 mb-6">An aggressive but feasible timeline to deliver a new generation of validated therapeutic targets.</p>
+                <div class="relative w-full">
+                    <div class="absolute left-4 md:left-1/2 top-0 h-full w-1 bg-gray-200 rounded-full -ml-0.5"></div>
+                    <div class="relative space-y-8">
+                        
+                        <div class="relative flex items-center md:justify-normal md:w-1/2">
+                            <div class="absolute left-4 md:left-auto md:right-4 h-8 w-1 bg-gray-200 -ml-0.5"></div>
+                            <div class="absolute left-0 h-8 w-8 rounded-full bg-purple flex items-center justify-center -ml-3.5 z-10">
+                                <span class="text-white font-bold">1</span>
+                            </div>
+                            <div class="ml-12 md:ml-0 md:mr-12 bg-purple-50 p-4 rounded-lg shadow w-full">
+                                <h3 class="font-bold text-purple mb-1">Phase 1: Infrastructure & Ingestion</h3>
+                                <p class="text-sm text-gray-700">Months 1-3: Deploy cloud infra, ingest UKB data, build "Neck-to-Knee" cropping pipeline.</p>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center md:justify-end md:w-1/2 md:ml-auto">
+                            <div class="absolute left-4 h-8 w-1 bg-gray-200 -ml-0.5"></div>
+                            <div class="absolute left-0 md:left-auto md:right-0 h-8 w-8 rounded-full bg-purple flex items-center justify-center -ml-3.5 md:-mr-3.5 z-10">
+                                <span class="text-white font-bold">2</span>
+                            </div>
+                            <div class="ml-12 md:ml-0 md:mr-12 bg-purple-50 p-4 rounded-lg shadow w-full">
+                                <h3 class="font-bold text-purple mb-1">Phase 2: Foundation Model Training</h3>
+                                <p class="text-sm text-gray-700">Months 4-9: Pre-train VideoMAE (MRI) & MAE (DXA). Train CLIP-style fusion. Generate embeddings.</p>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center md:justify-normal md:w-1/2">
+                            <div class="absolute left-4 h-8 w-1 bg-gray-200 -ml-0.5"></div>
+                            <div class="absolute left-0 h-8 w-8 rounded-full bg-purple flex items-center justify-center -ml-3.5 z-10">
+                                <span class="text-white font-bold">3</span>
+                            </div>
+                            <div class="ml-12 md:ml-0 md:mr-12 bg-purple-50 p-4 rounded-lg shadow w-full">
+                                <h3 class="font-bold text-purple mb-1">Phase 3: Phenotype & I-KGWAS</h3>
+                                <p class="text-sm text-gray-700">Months 10-14: Run PCA & Leiden Clustering. Build Knowledge Graph. Train HGT for target identification.</p>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-center md:justify-end md:w-1/2 md:ml-auto">
+                            <div class="absolute left-4 h-8 w-1 bg-gray-200 -ml-0.5"></div>
+                            <div class="absolute left-0 md:left-auto md:right-0 h-8 w-8 rounded-full bg-pinkaccent flex items-center justify-center -ml-3.5 md:-mr-3.5 z-10">
+                                <span class="text-white font-bold">4</span>
+                            </div>
+                            <div class="ml-12 md:ml-0 md:mr-12 p-4 rounded-lg shadow w-full" style="background-color: #FD5DA81A;">
+                                <h3 class="font-bold text-pinkaccent mb-1">Phase 4: "Virtual Cartilage" Deep Dive</h3>
+                                <p class="text-sm text-gray-700">Months 15-18: Fine-tune scGPT. Perform *in silico* knockouts. Synthesize final "Atlas of OA."</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <footer class="md:col-span-2 text-center text-gray-500 text-sm mt-8">
+                A Visual Summary of the Strategic Research Proposal.
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                  return label.join(' ');
+                } else {
+                  return label;
+                }
+            };
+
+            const wrapLabels = (labels, maxWidth) => {
+                return labels.map(label => {
+                    if (typeof label === 'string' && label.length > maxWidth) {
+                        const words = label.split(' ');
+                        const newLabel = [];
+                        let line = '';
+                        words.forEach(word => {
+                            if ((line + word).length > maxWidth) {
+                                newLabel.push(line);
+                                line = word;
+                            } else {
+                                line = (line ? line + ' ' : '') + word;
+                            }
+                        });
+                        newLabel.push(line);
+                        return newLabel;
+                    }
+                    return label;
+                });
+            };
+
+            const gwasLabels = [
+                'COL10A1', 'MMP13', 'ADAMTS5', 'IL-6R', 'RUNX2', 
+                'VEGFA', 'TNF-alpha', 'FGFR3', 'COMP', 'ACAN'
+            ];
+            const gwasCtx = document.getElementById('gwasChart').getContext('2d');
+            new Chart(gwasCtx, {
+                type: 'bar',
+                data: {
+                    labels: wrapLabels(gwasLabels, 16),
+                    datasets: [{
+                        label: 'Gene Association Score (Phenotype 4)',
+                        data: [9.8, 9.5, 9.2, 8.7, 8.5, 8.1, 7.9, 7.5, 7.2, 6.8],
+                        backgroundColor: '#00509D',
+                        borderColor: '#003F88',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'I-KGWAS Prioritization Score'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+
+            const scgptCtx = document.getElementById('scgptChart').getContext('2d');
+            new Chart(scgptCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['COL10A1', 'MMP13', 'ACAN', 'COMP', 'IL-6', 'TNF'],
+                    datasets: [
+                        {
+                            label: 'Diseased Cell',
+                            data: [0.9, 0.8, 0.2, 0.3, 0.7, 0.6],
+                            backgroundColor: 'rgba(253, 93, 168, 0.2)',
+                            borderColor: '#FD5DA8',
+                            pointBackgroundColor: '#FD5DA8'
+                        },
+                        {
+                            label: 'Healthy Cell',
+                            data: [0.2, 0.1, 0.8, 0.9, 0.1, 0.1],
+                            backgroundColor: 'rgba(0, 63, 136, 0.2)',
+                            borderColor: '#003F88',
+                            pointBackgroundColor: '#003F88'
+                        },
+                        {
+                            label: 'Simulated Knockout (GENE_X)',
+                            data: [0.3, 0.2, 0.7, 0.7, 0.2, 0.2],
+                            backgroundColor: 'rgba(94, 96, 206, 0.2)',
+                            borderColor: '#5E60CE',
+                            pointBackgroundColor: '#5E60CE'
+                        }
+                    ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 1,
+                            pointLabels: {
+                                font: {
+                                    size: 10
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
+                }
+            });
+
+            const trace1 = {
+                x: [1, 1.5, 1.2, 1.8, 1.6, 2.1],
+                y: [1, 1.2, 1.8, 1.6, 1.1, 1.7],
+                mode: 'markers',
+                type: 'scattergl',
+                name: 'Phenotype 1 (Metabolic)',
+                marker: { color: '#003F88', size: 8, opacity: 0.7 }
+            };
+            const trace2 = {
+                x: [4, 4.2, 4.8, 4.6, 4.1, 4.7],
+                y: [4, 4.5, 4.2, 4.8, 4.6, 4.1],
+                mode: 'markers',
+                type: 'scattergl',
+                name: 'Phenotype 2 (Inflammatory)',
+                marker: { color: '#FD5DA8', size: 8, opacity: 0.7 }
+            };
+            const trace3 = {
+                x: [1.5, 2.1, 2.3, 1.9, 2.5, 2.2],
+                y: [4.5, 4.1, 4.3, 4.9, 4.5, 4.2],
+                mode: 'markers',
+                type: 'scattergl',
+                name: 'Phenotype 3 (Mechanical)',
+                marker: { color: '#5E60CE', size: 8, opacity: 0.7 }
+            };
+            const data = [trace1, trace2, trace3];
+            const layout = {
+                title: {
+                    text: 'Latent Phenotype Clusters (Simulated PCA)',
+                    font: {
+                        family: 'Inter, sans-serif',
+                        size: 16
+                    }
+                },
+                xaxis: { title: 'Principal Component 1' },
+                yaxis: { title: 'Principal Component 2' },
+                hovermode: 'closest',
+                autosize: true,
+                margin: { l: 50, r: 30, b: 50, t: 50 },
+                legend: {
+                    orientation: 'h',
+                    yanchor: 'bottom',
+                    y: -0.3,
+                    xanchor: 'center',
+                    x: 0.5
+                }
+            };
+            const config = {
+                responsive: true,
+                displayModeBar: false 
+            };
+            Plotly.newPlot('scatterPlot', data, layout, config);
+        });
+    </script>
+</body>
+</html>
